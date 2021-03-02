@@ -1,11 +1,50 @@
-// var container = document.getElementById("container");
-var $ = function (selector) {
-    //find DOM element
+//Enums with constant values;
+//must be declared at top
+var TodoState;
+(function (TodoState) {
+    TodoState[TodoState["New"] = 1] = "New";
+    TodoState[TodoState["Active"] = 2] = "Active";
+    TodoState[TodoState["Complete"] = 3] = "Complete";
+    TodoState[TodoState["Deleted"] = 4] = "Deleted";
+})(TodoState || (TodoState = {}));
+var todo = {
+    name: "pick up drycleaning",
+    state: TodoState.New,
 };
-var todo = { name: "pick up drycleaning" };
-var container = $("#container");
-container.data("todo", todo);
-var savedTodo = container.data("todo");
+// var container = document.getElementById("container");
+//functions and interfaces together
+// interface Todo {
+//   name: string;
+//   completed?: boolean; //optional
+// }
+// interface jQuery {
+//   (selector: string | any): jQueryElement;
+//   fn: any;
+//   version: number;
+// }
+// interface jQueryElement {
+//   data(name: string): any;
+//   data(name: string, data: any): jQueryElement;
+// }
+// interface jQueryElement {
+//   todo(): Todo;
+//   todo(todo: Todo): jQueryElement;
+// }
+// var $ = <jQuery>function (selector) {
+//   //find DOM element
+// };
+// $.fn.todo = function (todo?: Todo): Todo {
+//   if (todo) {
+//     $(this).data("todo", todo);
+//   } else {
+//     return $(this).data("todo");
+//   }
+// };
+// let todo = { name: "pick up drycleaning" };
+// let container = $("#container");
+// container.data("todo", todo);
+// let savedTodo = container.data("todo");
+// container.todo(todo);
 // var $ = <jQuery>function (selector) {
 //   //find DOM element
 // };

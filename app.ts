@@ -1,45 +1,63 @@
+//Enums with constant values;
+
+interface Todo {
+  name: string;
+  state: TodoState;
+}
+//must be declared at top
+enum TodoState {
+  New = 1,
+  Active,
+  Complete,
+  Deleted,
+}
+let todo: Todo = {
+  name: "pick up drycleaning",
+  state: TodoState.New,
+};
+
 // var container = document.getElementById("container");
 
 //functions and interfaces together
 
-interface Todo {
-  name: string;
-  completed?: boolean; //optional
-}
-interface jQuery {
-  (selector: string | any): jQueryElement;
-  fn: any;
-  version: number;
-}
+// interface Todo {
+//   name: string;
+//   completed?: boolean; //optional
+// }
+// interface jQuery {
+//   (selector: string | any): jQueryElement;
+//   fn: any;
+//   version: number;
+// }
 
-interface jQueryElement {
-  data(name: string): any;
-  data(name: string, data: any): jQueryElement;
-}
+// interface jQueryElement {
+//   data(name: string): any;
+//   data(name: string, data: any): jQueryElement;
+// }
 
-interface jQueryElement {
-  todo(): Todo;
-  todo(todo: Todo): jQueryElement;
-}
+// interface jQueryElement {
+//   todo(): Todo;
+//   todo(todo: Todo): jQueryElement;
+// }
 
-var $ = <jQuery>function (selector) {
-  //find DOM element
-};
+// var $ = <jQuery>function (selector) {
+//   //find DOM element
+// };
 
-$.fn.todo = function (todo?: Todo): Todo {
-  if (todo) {
-    $(this).data("todo", todo);
-  } else {
-    return $(this).data("todo");
-  }
-};
+// $.fn.todo = function (todo?: Todo): Todo {
+//   if (todo) {
+//     $(this).data("todo", todo);
+//   } else {
+//     return $(this).data("todo");
+//   }
+// };
 
-let todo = { name: "pick up drycleaning" };
-let container = $("#container");
-container.data("todo", todo);
-let savedTodo = container.data("todo");
+// let todo = { name: "pick up drycleaning" };
+// let container = $("#container");
+// container.data("todo", todo);
+// let savedTodo = container.data("todo");
 
-container.todo(todo);
+// container.todo(todo);
 
 // var $ = <jQuery>function (selector) {
 //   //find DOM element
