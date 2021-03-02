@@ -1,26 +1,42 @@
 var container = document.getElementById("container");
 
-//the spread operator - review
+let animal = {
+  name: "fido",
+  species: "dog",
+  age: 5,
+  speak: function () {
+    console.log("Woof!");
+  },
+};
 
-function calculate(action, ...values) {
-  let total = 0;
-
-  for (var value of values) {
-    switch (action) {
-      case "add":
-        total += value;
-        break;
-      case "subtract":
-        total -= value;
-        break;
-      default:
-        break;
-    }
-  }
-  return total;
+function calculateAge(birthYear) {
+  return Date.now() - birthYear;
 }
 
-calculate(1, 2, 3, 5);
+//the spread operator - review
+
+// function calculate(action, ...values) {
+//   let total = 0;
+
+//   for (var value of values) {
+//     switch (action) {
+//       case "add":
+//         total += value;
+//         break;
+//       case "subtract":
+//         total -= value;
+//         break;
+//       default:
+//         break;
+//     }
+//   }
+//   return total;
+// }
+
+// calculate('subtract',1, 2, 3, 5);
+
+// let source = [3,4,5];
+// let target = [1,2,...source,6,7,8];
 
 // //destructing examples:
 
