@@ -1,15 +1,26 @@
 var container = document.getElementById("container");
-var animal = {
-    name: "fido",
-    species: "dog",
-    age: 5,
-    speak: function () {
-        console.log("Woof!");
-    },
-};
-function calculateAge(birthYear) {
-    return Date.now() - birthYear;
+//TS specifying types
+//take guessing out of typescript
+function totalLength(x, y) {
+    var total = x.length + y.length;
+    return total;
 }
+//typescript - type inference
+// let animal = {
+//   name: "fido",
+//   species: "dog",
+//   age: 5,
+//   speak: function () {
+//     console.log("Woof!");
+//   },
+// };
+// function calculateAge(birthYear) {
+//   return Date.now() - birthYear;
+// }
+// function totalLength(x, y): number {
+//     let total = x.length + y.length;
+//     return total;
+// }
 //the spread operator - review
 // function calculate(action, ...values) {
 //   let total = 0;
