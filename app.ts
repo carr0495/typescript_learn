@@ -1,32 +1,54 @@
 var container = document.getElementById("container");
 
-//destructing examples:
+//the spread operator - review
 
-let a = 1;
-let b = 5;
+function calculate(action, ...values) {
+  let total = 0;
 
-//quick way to swap values
-[a, b] = [b, a];
-
-let todo = {
-  id: 123,
-  title: "pick up drycleaning",
-  completed: false,
-};
-
-let { id, title, completed } = todo;
-
-function countdown({
-  initial,
-  final: final = 0,
-  interval: interval = 1,
-  initial: current,
-}) {
-  while (current > final) {
-    container.innerHTML = current;
-    current -= interval;
+  for (var value of values) {
+    switch (action) {
+      case "add":
+        total += value;
+        break;
+      case "subtract":
+        total -= value;
+        break;
+      default:
+        break;
+    }
   }
+  return total;
 }
+
+calculate(1, 2, 3, 5);
+
+// //destructing examples:
+
+// let a = 1;
+// let b = 5;
+
+// //quick way to swap values
+// [a, b] = [b, a];
+
+// let todo = {
+//   id: 123,
+//   title: "pick up drycleaning",
+//   completed: false,
+// };
+
+// let { id, title, completed } = todo;
+
+// function countdown({
+//   initial,
+//   final: final = 0,
+//   interval: interval = 1,
+//   initial: current,
+// }) {
+//   while (current > final) {
+//     container.innerHTML = current;
+//     current -= interval;
+//   }
+// }
 
 // let array = [
 //     "pick up drycleaning",

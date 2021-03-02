@@ -1,23 +1,49 @@
-var _a;
 var container = document.getElementById("container");
-//destructing examples:
-var a = 1;
-var b = 5;
-//quick way to swap values
-_a = [b, a], a = _a[0], b = _a[1];
-var todo = {
-    id: 123,
-    title: "pick up drycleaning",
-    completed: false,
-};
-var id = todo.id, title = todo.title, completed = todo.completed;
-function countdown(_a) {
-    var initial = _a.initial, _b = _a.final, final = _b === void 0 ? 0 : _b, _c = _a.interval, interval = _c === void 0 ? 1 : _c, current = _a.initial;
-    while (current > final) {
-        container.innerHTML = current;
-        current -= interval;
+//the spread operator - review
+function calculate(action) {
+    var values = [];
+    for (var _i = 1; _i < arguments.length; _i++) {
+        values[_i - 1] = arguments[_i];
     }
+    var total = 0;
+    for (var _a = 0, values_1 = values; _a < values_1.length; _a++) {
+        var value = values_1[_a];
+        switch (action) {
+            case "add":
+                total += value;
+                break;
+            case "subtract":
+                total -= value;
+                break;
+            default:
+                break;
+        }
+    }
+    return total;
 }
+calculate(1, 2, 3, 5);
+// //destructing examples:
+// let a = 1;
+// let b = 5;
+// //quick way to swap values
+// [a, b] = [b, a];
+// let todo = {
+//   id: 123,
+//   title: "pick up drycleaning",
+//   completed: false,
+// };
+// let { id, title, completed } = todo;
+// function countdown({
+//   initial,
+//   final: final = 0,
+//   interval: interval = 1,
+//   initial: current,
+// }) {
+//   while (current > final) {
+//     container.innerHTML = current;
+//     current -= interval;
+//   }
+// }
 // let array = [
 //     "pick up drycleaning",
 //     "Clean batcave",
