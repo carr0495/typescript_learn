@@ -1,9 +1,19 @@
 var container = document.getElementById("container");
 
 //TS specifying types
-//take guessing out of typescript
-function totalLength(x: any[], y: string): number {
+//take guessing out of typescript weith union types
+function totalLength(x: string | any[], y: string | any[]): number {
   let total: number = x.length + y.length;
+
+  x.slice(0);
+  //check the types of your variables.
+  if (x instanceof Array) {
+    x.push("abc");
+  }
+  if (x instanceof String) {
+    x.substr(1);
+  }
+
   return total;
 }
 
