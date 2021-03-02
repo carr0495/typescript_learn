@@ -1,22 +1,71 @@
-var container = document.getElementById("container");
+// var container = document.getElementById("container");
+
+//functions and interfaces together
+
+interface Todo {
+  name: string;
+  completed?: boolean; //optional
+}
+interface jQuery {
+  (selector: string | any): jQueryElement;
+  fn: any;
+  version: number;
+}
+
+interface jQueryElement {
+  data(name: string): any;
+  data(name: string, data: any): jQueryElement;
+}
+
+interface jQueryElement {
+  todo(): Todo;
+  todo(todo: Todo): jQueryElement;
+}
+
+var $ = <jQuery>function (selector) {
+  //find DOM element
+};
+
+$.fn.todo = function (todo?: Todo): Todo {
+  if (todo) {
+    $(this).data("todo", todo);
+  } else {
+    return $(this).data("todo");
+  }
+};
+
+let todo = { name: "pick up drycleaning" };
+let container = $("#container");
+container.data("todo", todo);
+let savedTodo = container.data("todo");
+
+container.todo(todo);
+
+// var $ = <jQuery>function (selector) {
+//   //find DOM element
+// };
+
+// var element = $("container");
+// element.id
+// element.innerHTML
 
 //custom types in typescript
 
 //interfaces, classes and enums
 //not visible at runtime
-interface Todo {
-  name: string;
-  completed?: boolean; //optional
-}
+// interface Todo {
+//   name: string;
+//   completed?: boolean; //optional
+// }
 
-interface ITodoService {
-  add(todo: Todo): Todo;
-  delete(todoId: number): void;
-  getAll(): Todo[];
-  getById(todoId: number): Todo;
-}
+// interface ITodoService {
+//   add(todo: Todo): Todo;
+//   delete(todoId: number): void;
+//   getAll(): Todo[];
+//   getById(todoId: number): Todo;
+// }
 
-var todo: Todo = { name: "Aiden", completed: false };
+// var todo: Todo = { name: "Aiden", completed: false };
 
 // //function overloads in typescript
 

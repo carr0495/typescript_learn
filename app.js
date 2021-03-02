@@ -1,5 +1,31 @@
-var container = document.getElementById("container");
-var todo = { name: "Aiden", completed: false };
+// var container = document.getElementById("container");
+var $ = function (selector) {
+    //find DOM element
+};
+var todo = { name: "pick up drycleaning" };
+var container = $("#container");
+container.data("todo", todo);
+var savedTodo = container.data("todo");
+// var $ = <jQuery>function (selector) {
+//   //find DOM element
+// };
+// var element = $("container");
+// element.id
+// element.innerHTML
+//custom types in typescript
+//interfaces, classes and enums
+//not visible at runtime
+// interface Todo {
+//   name: string;
+//   completed?: boolean; //optional
+// }
+// interface ITodoService {
+//   add(todo: Todo): Todo;
+//   delete(todoId: number): void;
+//   getAll(): Todo[];
+//   getById(todoId: number): Todo;
+// }
+// var todo: Todo = { name: "Aiden", completed: false };
 // //function overloads in typescript
 // function totalLength(x: string, y: string): number;
 // function totalLength(x: any[], y: any[]): number;
