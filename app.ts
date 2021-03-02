@@ -1,23 +1,41 @@
 var container = document.getElementById("container");
 
-//function overloads in typescript
+//custom types in typescript
 
-function totalLength(x: string, y: string): number;
-function totalLength(x: any[], y: any[]): number;
-function totalLength(x: string | any[], y: string | any[]): number {
-  let total: number = x.length + y.length;
-
-  x.slice(0);
-  //check the types of your variables.
-  if (x instanceof Array) {
-    x.push("abc");
-  }
-  if (x instanceof String) {
-    x.substr(1);
-  }
-
-  return total;
+//interfaces, classes and enums
+//not visible at runtime
+interface Todo {
+  name: string;
+  completed?: boolean; //optional
 }
+
+interface ITodoService {
+  add(todo: Todo): Todo;
+  delete(todoId: number): void;
+  getAll(): Todo[];
+  getById(todoId: number): Todo;
+}
+
+var todo: Todo = { name: "Aiden", completed: false };
+
+// //function overloads in typescript
+
+// function totalLength(x: string, y: string): number;
+// function totalLength(x: any[], y: any[]): number;
+// function totalLength(x: string | any[], y: string | any[]): number {
+//   let total: number = x.length + y.length;
+
+//   x.slice(0);
+//   //check the types of your variables.
+//   if (x instanceof Array) {
+//     x.push("abc");
+//   }
+//   if (x instanceof String) {
+//     x.substr(1);
+//   }
+
+//   return total;
+// }
 
 //totalLength();
 
