@@ -1,16 +1,42 @@
-//class syntax
+//TS static properties
 
 class TodoService {
+  static lastId: number = 0;
   constructor(private todos: Todo[]) {}
+  add(todo: Todo) {
+    let newId = TodoService.getNextId();
+  }
   getAll() {
     return this.todos;
   }
+  static getNextId() {
+    return (TodoService.lastId += 1);
+  }
 }
-
 interface Todo {
   name: string;
-  completed?: boolean; //optional
+  state: TodoState; //optional
 }
+enum TodoState {
+  New = 1,
+  Active,
+  Complete,
+  Deleted,
+}
+
+//class syntax
+
+// class TodoService {
+//   constructor(private todos: Todo[]) {}
+//   getAll() {
+//     return this.todos;
+//   }
+// }
+
+// interface Todo {
+//   name: string;
+//   completed?: boolean; //optional
+// }
 
 //anonymous typesw with typescript
 
