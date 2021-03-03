@@ -1,5 +1,4 @@
-//TS smarter accessors
-
+//inheriting behaviour from abase class
 interface Todo {
   name: string;
   state: TodoState;
@@ -11,33 +10,73 @@ enum TodoState {
   Deleted,
 }
 
-class SmartTodo {
-  _state: TodoState;
-  name: string;
-
-  constructor(name: string) {
-    this.name = name;
+class TodoStateChanger {
+  constructor(private newState: TodoState) {}
+  canChangeState(todo: Todo): boolean {
+    return !!todo;
   }
 
-  get state() {
-    return this._state;
-  }
-  set state(newState) {
-    if (newState == TodoState.Complete) {
-      let canBeCompleted =
-        this.state == TodoState.Active || this.state == TodoState.Deleted;
-
-      if (!canBeCompleted) {
-        throw "todo must be active or deleted in order to be marked Completed";
-      }
+  changeState(todo: Todo): Todo {
+    if (this.canChangeState(todo)) {
+      todo.state = this.newState;
     }
-    this._state = newState;
+    return todo;
   }
 }
 
-let todo = new SmartTodo("Pick up Drycleaning");
+class CompleteTodoStateChanger extends TodoStateChanger {
+  //if you dont make a constructor, it will use parents constructor.
+  constructor() {
+    super(TodoState.Complete);
+  }
+  canChangeState(todo: Todo): boolean {
+    return (
+      super.canChangeState(todo) &&
+      (todo.state == TodoState.Active || todo.state == TodoState.Deleted)
+    );
+  }
+}
 
-todo.state = TodoState.Complete;
+//TS smarter accessors
+
+// interface Todo {
+//   name: string;
+//   state: TodoState;
+// }
+// enum TodoState {
+//   New = 1,
+//   Active,
+//   Complete,
+//   Deleted,
+// }
+
+// class SmartTodo {
+//   _state: TodoState;
+//   name: string;
+
+//   constructor(name: string) {
+//     this.name = name;
+//   }
+
+//   get state() {
+//     return this._state;
+//   }
+//   set state(newState) {
+//     if (newState == TodoState.Complete) {
+//       let canBeCompleted =
+//         this.state == TodoState.Active || this.state == TodoState.Deleted;
+
+//       if (!canBeCompleted) {
+//         throw "todo must be active or deleted in order to be marked Completed";
+//       }
+//     }
+//     this._state = newState;
+//   }
+// }
+
+// let todo = new SmartTodo("Pick up Drycleaning");
+
+// todo.state = TodoState.Complete;
 
 //TS static properties
 

@@ -1,4 +1,18 @@
-//TS smarter accessors
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var TodoState;
 (function (TodoState) {
     TodoState[TodoState["New"] = 1] = "New";
@@ -6,30 +20,66 @@ var TodoState;
     TodoState[TodoState["Complete"] = 3] = "Complete";
     TodoState[TodoState["Deleted"] = 4] = "Deleted";
 })(TodoState || (TodoState = {}));
-var SmartTodo = /** @class */ (function () {
-    function SmartTodo(name) {
-        this.name = name;
+var TodoStateChanger = /** @class */ (function () {
+    function TodoStateChanger(newState) {
+        this.newState = newState;
     }
-    Object.defineProperty(SmartTodo.prototype, "state", {
-        get: function () {
-            return this._state;
-        },
-        set: function (newState) {
-            if (newState == TodoState.Complete) {
-                var canBeCompleted = this.state == TodoState.Active || this.state == TodoState.Deleted;
-                if (!canBeCompleted) {
-                    throw "todo must be active or deleted in order to be marked Completed";
-                }
-            }
-            this._state = newState;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    return SmartTodo;
+    TodoStateChanger.prototype.canChangeState = function (todo) {
+        return !!todo;
+    };
+    TodoStateChanger.prototype.changeState = function (todo) {
+        if (this.canChangeState(todo)) {
+            todo.state = this.newState;
+        }
+        return todo;
+    };
+    return TodoStateChanger;
 }());
-var todo = new SmartTodo("Pick up Drycleaning");
-todo.state = TodoState.Complete;
+var CompleteTodoStateChanger = /** @class */ (function (_super) {
+    __extends(CompleteTodoStateChanger, _super);
+    //if you dont make a constructor, it will use parents constructor.
+    function CompleteTodoStateChanger() {
+        return _super.call(this, TodoState.Complete) || this;
+    }
+    CompleteTodoStateChanger.prototype.canChangeState = function (todo) {
+        return (_super.prototype.canChangeState.call(this, todo) &&
+            (todo.state == TodoState.Active || todo.state == TodoState.Deleted));
+    };
+    return CompleteTodoStateChanger;
+}(TodoStateChanger));
+//TS smarter accessors
+// interface Todo {
+//   name: string;
+//   state: TodoState;
+// }
+// enum TodoState {
+//   New = 1,
+//   Active,
+//   Complete,
+//   Deleted,
+// }
+// class SmartTodo {
+//   _state: TodoState;
+//   name: string;
+//   constructor(name: string) {
+//     this.name = name;
+//   }
+//   get state() {
+//     return this._state;
+//   }
+//   set state(newState) {
+//     if (newState == TodoState.Complete) {
+//       let canBeCompleted =
+//         this.state == TodoState.Active || this.state == TodoState.Deleted;
+//       if (!canBeCompleted) {
+//         throw "todo must be active or deleted in order to be marked Completed";
+//       }
+//     }
+//     this._state = newState;
+//   }
+// }
+// let todo = new SmartTodo("Pick up Drycleaning");
+// todo.state = TodoState.Complete;
 //TS static properties
 // class TodoService {
 //   static lastId: number = 0;
