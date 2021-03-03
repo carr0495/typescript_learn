@@ -1,8 +1,15 @@
-function totalLength(x, y) {
-    var total = x.length + y.length;
-    return total;
-}
-var length = totalLength("Jess", "Chadwick");
+// encapsulating with namespaces
+// (function defineType() {
+// })();
+//applying generic constraints
+// interface IHaveLength {
+//   length: number;
+// }
+// function totalLength<T extends IHaveLength>(x: T, y: T) {
+//   let total: number = x.length + y.length;
+//   return total;
+// }
+// var length = totalLength("Jess", "Chadwick");
 //creating Generic Classes
 // let array: number[] = [1, 2, 3];
 // let array2: Array<number> = [1, 2, 3];

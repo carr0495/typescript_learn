@@ -1,3 +1,14 @@
+import { Todo } from "./model";
+
+let _lastId: number = 0;
+
+export interface ITodoService {
+  add(todo: Todo): Todo;
+  delete(todoId: number): void;
+  getAll(): Todo[];
+  getById(todoId: number): Todo;
+}
+
 class TodoService implements ITodoService {
   private static _lastId: number = 0;
 

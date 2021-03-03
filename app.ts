@@ -1,14 +1,19 @@
+// encapsulating with namespaces
+// (function defineType() {
+
+// })();
+
 //applying generic constraints
-interface IHaveLength {
-  length: number;
-}
+// interface IHaveLength {
+//   length: number;
+// }
 
-function totalLength<T extends IHaveLength>(x: T, y: T) {
-  let total: number = x.length + y.length;
-  return total;
-}
+// function totalLength<T extends IHaveLength>(x: T, y: T) {
+//   let total: number = x.length + y.length;
+//   return total;
+// }
 
-var length = totalLength("Jess", "Chadwick");
+// var length = totalLength("Jess", "Chadwick");
 
 //creating Generic Classes
 
