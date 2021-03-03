@@ -1,11 +1,35 @@
-function clone<T>(value: T) {
-  let serialized = JSON.stringify(value);
-  return JSON.parse(serialized);
+//creating Generic Classes
+
+let array: number[] = [1, 2, 3];
+let array2: Array<number> = [1, 2, 3];
+
+class KeyValuePair<TKey, TValue> {
+  constructor(public key: TKey, public value: TValue) {}
 }
 
-clone("Hello");
+let pair1 = new KeyValuePair(123, "hello");
+let pair2 = new KeyValuePair("second", new Date(Date.now()));
 
-clone(123);
+class KeyValuePairPrinter<T, U> {
+  constructor(private pairs: KeyValuePair<T, U>[]) {}
+  print() {
+    for (const p of this.pairs) {
+      console.log(`${p.key}: ${p.value}`);
+    }
+  }
+}
+
+let printer = new KeyValuePairPrinter([pair1, pair2]);
+printer.print();
+
+// function clone<T>(value: T) {
+//   let serialized = JSON.stringify(value);
+//   return JSON.parse(serialized);
+// }
+
+// clone("Hello");
+
+// clone(123);
 
 //controlling visibility with access modifiers
 // interface Todo {

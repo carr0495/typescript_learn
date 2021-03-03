@@ -1,9 +1,35 @@
-function clone(value) {
-    var serialized = JSON.stringify(value);
-    return JSON.parse(serialized);
-}
-clone("Hello");
-clone(123);
+//creating Generic Classes
+var array = [1, 2, 3];
+var array2 = [1, 2, 3];
+var KeyValuePair = /** @class */ (function () {
+    function KeyValuePair(key, value) {
+        this.key = key;
+        this.value = value;
+    }
+    return KeyValuePair;
+}());
+var pair1 = new KeyValuePair(123, "hello");
+var pair2 = new KeyValuePair("second", new Date(Date.now()));
+var KeyValuePairPrinter = /** @class */ (function () {
+    function KeyValuePairPrinter(pairs) {
+        this.pairs = pairs;
+    }
+    KeyValuePairPrinter.prototype.print = function () {
+        for (var _i = 0, _a = this.pairs; _i < _a.length; _i++) {
+            var p = _a[_i];
+            console.log(p.key + ": " + p.value);
+        }
+    };
+    return KeyValuePairPrinter;
+}());
+var printer = new KeyValuePairPrinter([pair1, pair2]);
+printer.print();
+// function clone<T>(value: T) {
+//   let serialized = JSON.stringify(value);
+//   return JSON.parse(serialized);
+// }
+// clone("Hello");
+// clone(123);
 //controlling visibility with access modifiers
 // interface Todo {
 //   name: string;
