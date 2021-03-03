@@ -1,21 +1,8 @@
-//TS static properties
+//TS smarter accessors
 
-class TodoService {
-  static lastId: number = 0;
-  constructor(private todos: Todo[]) {}
-  add(todo: Todo) {
-    let newId = TodoService.getNextId();
-  }
-  getAll() {
-    return this.todos;
-  }
-  static getNextId() {
-    return (TodoService.lastId += 1);
-  }
-}
 interface Todo {
   name: string;
-  state: TodoState; //optional
+  state: TodoState;
 }
 enum TodoState {
   New = 1,
@@ -23,6 +10,60 @@ enum TodoState {
   Complete,
   Deleted,
 }
+
+class SmartTodo {
+  _state: TodoState;
+  name: string;
+
+  constructor(name: string) {
+    this.name = name;
+  }
+
+  get state() {
+    return this._state;
+  }
+  set state(newState) {
+    if (newState == TodoState.Complete) {
+      let canBeCompleted =
+        this.state == TodoState.Active || this.state == TodoState.Deleted;
+
+      if (!canBeCompleted) {
+        throw "todo must be active or deleted in order to be marked Completed";
+      }
+    }
+    this._state = newState;
+  }
+}
+
+let todo = new SmartTodo("Pick up Drycleaning");
+
+todo.state = TodoState.Complete;
+
+//TS static properties
+
+// class TodoService {
+//   static lastId: number = 0;
+//   constructor(private todos: Todo[]) {}
+//   add(todo: Todo) {
+//     let newId = TodoService.getNextId();
+//   }
+//   getAll() {
+//     return this.todos;
+//   }
+//   static getNextId() {
+//     return (TodoService.lastId += 1);
+//   }
+// }
+// interface Todo {
+//   name: string;
+//   state: TodoState; //optional
+// }
+// enum TodoState {
+//   New = 1,
+//   Active,
+//   Complete,
+//   Deleted,
+// }
 
 //class syntax
 

@@ -1,20 +1,4 @@
-//TS static properties
-var TodoService = /** @class */ (function () {
-    function TodoService(todos) {
-        this.todos = todos;
-    }
-    TodoService.prototype.add = function (todo) {
-        var newId = TodoService.getNextId();
-    };
-    TodoService.prototype.getAll = function () {
-        return this.todos;
-    };
-    TodoService.getNextId = function () {
-        return (TodoService.lastId += 1);
-    };
-    TodoService.lastId = 0;
-    return TodoService;
-}());
+//TS smarter accessors
 var TodoState;
 (function (TodoState) {
     TodoState[TodoState["New"] = 1] = "New";
@@ -22,6 +6,54 @@ var TodoState;
     TodoState[TodoState["Complete"] = 3] = "Complete";
     TodoState[TodoState["Deleted"] = 4] = "Deleted";
 })(TodoState || (TodoState = {}));
+var SmartTodo = /** @class */ (function () {
+    function SmartTodo(name) {
+        this.name = name;
+    }
+    Object.defineProperty(SmartTodo.prototype, "state", {
+        get: function () {
+            return this._state;
+        },
+        set: function (newState) {
+            if (newState == TodoState.Complete) {
+                var canBeCompleted = this.state == TodoState.Active || this.state == TodoState.Deleted;
+                if (!canBeCompleted) {
+                    throw "todo must be active or deleted in order to be marked Completed";
+                }
+            }
+            this._state = newState;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    return SmartTodo;
+}());
+var todo = new SmartTodo("Pick up Drycleaning");
+todo.state = TodoState.Complete;
+//TS static properties
+// class TodoService {
+//   static lastId: number = 0;
+//   constructor(private todos: Todo[]) {}
+//   add(todo: Todo) {
+//     let newId = TodoService.getNextId();
+//   }
+//   getAll() {
+//     return this.todos;
+//   }
+//   static getNextId() {
+//     return (TodoService.lastId += 1);
+//   }
+// }
+// interface Todo {
+//   name: string;
+//   state: TodoState; //optional
+// }
+// enum TodoState {
+//   New = 1,
+//   Active,
+//   Complete,
+//   Deleted,
+// }
 //class syntax
 // class TodoService {
 //   constructor(private todos: Todo[]) {}
