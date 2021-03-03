@@ -1,3 +1,12 @@
+function clone<T>(value: T) {
+  let serialized = JSON.stringify(value);
+  return JSON.parse(serialized);
+}
+
+clone("Hello");
+
+clone(123);
+
 //controlling visibility with access modifiers
 // interface Todo {
 //   name: string;
