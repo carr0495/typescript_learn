@@ -1,20 +1,31 @@
+//anonymous typesw with typescript
+
+let todo: { name: string };
+
+// todo = {age: 41}
+
+function totalLength(x: { length: number }, y: { length: number }): number {
+  let total: number = x.length + y.length;
+  return total;
+}
+
 //Enums with constant values;
 
-interface Todo {
-  name: string;
-  state: TodoState;
-}
-//must be declared at top
-enum TodoState {
-  New = 1,
-  Active,
-  Complete,
-  Deleted,
-}
-let todo: Todo = {
-  name: "pick up drycleaning",
-  state: TodoState.New,
-};
+// interface Todo {
+//   name: string;
+//   state: TodoState;
+// }
+// //must be declared at top
+// enum TodoState {
+//   New = 1,
+//   Active,
+//   Complete,
+//   Deleted,
+// }
+// let todo: Todo = {
+//   name: "pick up drycleaning",
+//   state: TodoState.New,
+// };
 
 // var container = document.getElementById("container");
 
