@@ -1,4 +1,4 @@
-//inheriting behaviour from abase class //adding abstract classes
+//controlling visibility with access modifiers
 interface Todo {
   name: string;
   state: TodoState;
@@ -9,32 +9,68 @@ enum TodoState {
   Complete,
   Deleted,
 }
+//private is most restrictive-can only be used inside class //
+//protected is the same as private, but can be accesed in any inhertied classes
+//public is accessible through definition
+class TodoService {
+  static lastId: number = 0;
+  constructor(protected todos: Todo[]) {}
 
-abstract class TodoStateChanger {
-  constructor(private newState: TodoState) {}
+  private get nextId() {
+    return TodoService.getNextId();
+  }
+  private set nextId(nextId) {
+    TodoService.lastId = nextId - 1;
+  }
 
-  abstract canChangeState(todo: Todo): boolean;
-
-  changeState(todo: Todo): Todo {
-    if (this.canChangeState(todo)) {
-      todo.state = this.newState;
-    }
-    return todo;
+  add(todo: Todo) {
+    let newId = this.nextId;
+  }
+  getAll() {
+    return this.todos;
+  }
+  static getNextId() {
+    return (TodoService.lastId += 1);
   }
 }
 
-class CompleteTodoStateChanger extends TodoStateChanger {
-  //if you dont make a constructor, it will use parents constructor.
-  constructor() {
-    super(TodoState.Complete);
-  }
-  canChangeState(todo: Todo): boolean {
-    return (
-      !!todo &&
-      (todo.state == TodoState.Active || todo.state == TodoState.Deleted)
-    );
-  }
-}
+//inheriting behaviour from abase class //adding abstract classes
+// interface Todo {
+//   name: string;
+//   state: TodoState;
+// }
+// enum TodoState {
+//   New = 1,
+//   Active,
+//   Complete,
+//   Deleted,
+// }
+
+// abstract class TodoStateChanger {
+//   constructor(private newState: TodoState) {}
+
+//   abstract canChangeState(todo: Todo): boolean;
+
+//   changeState(todo: Todo): Todo {
+//     if (this.canChangeState(todo)) {
+//       todo.state = this.newState;
+//     }
+//     return todo;
+//   }
+// }
+
+// class CompleteTodoStateChanger extends TodoStateChanger {
+//   //if you dont make a constructor, it will use parents constructor.
+//   constructor() {
+//     super(TodoState.Complete);
+//   }
+//   canChangeState(todo: Todo): boolean {
+//     return (
+//       !!todo &&
+//       (todo.state == TodoState.Active || todo.state == TodoState.Deleted)
+//     );
+//   }
+// }
 
 //TS smarter accessors
 

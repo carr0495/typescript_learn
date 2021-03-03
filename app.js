@@ -1,18 +1,3 @@
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 var TodoState;
 (function (TodoState) {
     TodoState[TodoState["New"] = 1] = "New";
@@ -20,30 +5,68 @@ var TodoState;
     TodoState[TodoState["Complete"] = 3] = "Complete";
     TodoState[TodoState["Deleted"] = 4] = "Deleted";
 })(TodoState || (TodoState = {}));
-var TodoStateChanger = /** @class */ (function () {
-    function TodoStateChanger(newState) {
-        this.newState = newState;
+//private is most restrictive-can only be used inside class //
+//protected is the same as private, but can be accesed in any inhertied classes
+//public is accessible through definition
+var TodoService = /** @class */ (function () {
+    function TodoService(todos) {
+        this.todos = todos;
     }
-    TodoStateChanger.prototype.changeState = function (todo) {
-        if (this.canChangeState(todo)) {
-            todo.state = this.newState;
-        }
-        return todo;
+    Object.defineProperty(TodoService.prototype, "nextId", {
+        get: function () {
+            return TodoService.getNextId();
+        },
+        set: function (nextId) {
+            TodoService.lastId = nextId - 1;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    TodoService.prototype.add = function (todo) {
+        var newId = this.nextId;
     };
-    return TodoStateChanger;
+    TodoService.prototype.getAll = function () {
+        return this.todos;
+    };
+    TodoService.getNextId = function () {
+        return (TodoService.lastId += 1);
+    };
+    TodoService.lastId = 0;
+    return TodoService;
 }());
-var CompleteTodoStateChanger = /** @class */ (function (_super) {
-    __extends(CompleteTodoStateChanger, _super);
-    //if you dont make a constructor, it will use parents constructor.
-    function CompleteTodoStateChanger() {
-        return _super.call(this, TodoState.Complete) || this;
-    }
-    CompleteTodoStateChanger.prototype.canChangeState = function (todo) {
-        return (!!todo &&
-            (todo.state == TodoState.Active || todo.state == TodoState.Deleted));
-    };
-    return CompleteTodoStateChanger;
-}(TodoStateChanger));
+//inheriting behaviour from abase class //adding abstract classes
+// interface Todo {
+//   name: string;
+//   state: TodoState;
+// }
+// enum TodoState {
+//   New = 1,
+//   Active,
+//   Complete,
+//   Deleted,
+// }
+// abstract class TodoStateChanger {
+//   constructor(private newState: TodoState) {}
+//   abstract canChangeState(todo: Todo): boolean;
+//   changeState(todo: Todo): Todo {
+//     if (this.canChangeState(todo)) {
+//       todo.state = this.newState;
+//     }
+//     return todo;
+//   }
+// }
+// class CompleteTodoStateChanger extends TodoStateChanger {
+//   //if you dont make a constructor, it will use parents constructor.
+//   constructor() {
+//     super(TodoState.Complete);
+//   }
+//   canChangeState(todo: Todo): boolean {
+//     return (
+//       !!todo &&
+//       (todo.state == TodoState.Active || todo.state == TodoState.Deleted)
+//     );
+//   }
+// }
 //TS smarter accessors
 // interface Todo {
 //   name: string;
