@@ -1,26 +1,38 @@
+//applying generic constraints
+interface IHaveLength {
+  length: number;
+}
+
+function totalLength<T extends IHaveLength>(x: T, y: T) {
+  let total: number = x.length + y.length;
+  return total;
+}
+
+var length = totalLength("Jess", "Chadwick");
+
 //creating Generic Classes
 
-let array: number[] = [1, 2, 3];
-let array2: Array<number> = [1, 2, 3];
+// let array: number[] = [1, 2, 3];
+// let array2: Array<number> = [1, 2, 3];
 
-class KeyValuePair<TKey, TValue> {
-  constructor(public key: TKey, public value: TValue) {}
-}
+// class KeyValuePair<TKey, TValue> {
+//   constructor(public key: TKey, public value: TValue) {}
+// }
 
-let pair1 = new KeyValuePair(123, "hello");
-let pair2 = new KeyValuePair("second", new Date(Date.now()));
+// let pair1 = new KeyValuePair(123, "hello");
+// let pair2 = new KeyValuePair("second", new Date(Date.now()));
 
-class KeyValuePairPrinter<T, U> {
-  constructor(private pairs: KeyValuePair<T, U>[]) {}
-  print() {
-    for (const p of this.pairs) {
-      console.log(`${p.key}: ${p.value}`);
-    }
-  }
-}
+// class KeyValuePairPrinter<T, U> {
+//   constructor(private pairs: KeyValuePair<T, U>[]) {}
+//   print() {
+//     for (const p of this.pairs) {
+//       console.log(`${p.key}: ${p.value}`);
+//     }
+//   }
+// }
 
-let printer = new KeyValuePairPrinter([pair1, pair2]);
-printer.print();
+// let printer = new KeyValuePairPrinter([pair1, pair2]);
+// printer.print();
 
 // function clone<T>(value: T) {
 //   let serialized = JSON.stringify(value);
