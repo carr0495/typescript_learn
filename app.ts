@@ -1,4 +1,4 @@
-//inheriting behaviour from abase class
+//inheriting behaviour from abase class //adding abstract classes
 interface Todo {
   name: string;
   state: TodoState;
@@ -10,11 +10,10 @@ enum TodoState {
   Deleted,
 }
 
-class TodoStateChanger {
+abstract class TodoStateChanger {
   constructor(private newState: TodoState) {}
-  canChangeState(todo: Todo): boolean {
-    return !!todo;
-  }
+
+  abstract canChangeState(todo: Todo): boolean;
 
   changeState(todo: Todo): Todo {
     if (this.canChangeState(todo)) {
@@ -31,7 +30,7 @@ class CompleteTodoStateChanger extends TodoStateChanger {
   }
   canChangeState(todo: Todo): boolean {
     return (
-      super.canChangeState(todo) &&
+      !!todo &&
       (todo.state == TodoState.Active || todo.state == TodoState.Deleted)
     );
   }
