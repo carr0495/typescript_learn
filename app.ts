@@ -1,13 +1,27 @@
+//class syntax
+
+class TodoService {
+  constructor(private todos: Todo[]) {}
+  getAll() {
+    return this.todos;
+  }
+}
+
+interface Todo {
+  name: string;
+  completed?: boolean; //optional
+}
+
 //anonymous typesw with typescript
 
-let todo: { name: string };
+// let todo: { name: string };
 
-// todo = {age: 41}
+// // todo = {age: 41}
 
-function totalLength(x: { length: number }, y: { length: number }): number {
-  let total: number = x.length + y.length;
-  return total;
-}
+// function totalLength(x: { length: number }, y: { length: number }): number {
+//   let total: number = x.length + y.length;
+//   return total;
+// }
 
 //Enums with constant values;
 

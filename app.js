@@ -1,10 +1,20 @@
+//class syntax
+var TodoService = /** @class */ (function () {
+    function TodoService(todos) {
+        this.todos = todos;
+    }
+    TodoService.prototype.getAll = function () {
+        return this.todos;
+    };
+    return TodoService;
+}());
 //anonymous typesw with typescript
-var todo;
-// todo = {age: 41}
-function totalLength(x, y) {
-    var total = x.length + y.length;
-    return total;
-}
+// let todo: { name: string };
+// // todo = {age: 41}
+// function totalLength(x: { length: number }, y: { length: number }): number {
+//   let total: number = x.length + y.length;
+//   return total;
+// }
 //Enums with constant values;
 // interface Todo {
 //   name: string;
