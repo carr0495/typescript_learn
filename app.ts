@@ -1,38 +1,38 @@
 //controlling visibility with access modifiers
-interface Todo {
-  name: string;
-  state: TodoState;
-}
-enum TodoState {
-  New = 1,
-  Active,
-  Complete,
-  Deleted,
-}
+// interface Todo {
+//   name: string;
+//   state: TodoState;
+// }
+// enum TodoState {
+//   New = 1,
+//   Active,
+//   Complete,
+//   Deleted,
+// }
 //private is most restrictive-can only be used inside class //
 //protected is the same as private, but can be accesed in any inhertied classes
 //public is accessible through definition
-class TodoService {
-  static lastId: number = 0;
-  constructor(protected todos: Todo[]) {}
+// class TodoService {
+//   static lastId: number = 0;
+//   constructor(protected todos: Todo[]) {}
 
-  private get nextId() {
-    return TodoService.getNextId();
-  }
-  private set nextId(nextId) {
-    TodoService.lastId = nextId - 1;
-  }
+//   private get nextId() {
+//     return TodoService.getNextId();
+//   }
+//   private set nextId(nextId) {
+//     TodoService.lastId = nextId - 1;
+//   }
 
-  add(todo: Todo) {
-    let newId = this.nextId;
-  }
-  getAll() {
-    return this.todos;
-  }
-  static getNextId() {
-    return (TodoService.lastId += 1);
-  }
-}
+//   add(todo: Todo) {
+//     let newId = this.nextId;
+//   }
+//   getAll() {
+//     return this.todos;
+//   }
+//   static getNextId() {
+//     return (TodoService.lastId += 1);
+//   }
+// }
 
 //inheriting behaviour from abase class //adding abstract classes
 // interface Todo {
